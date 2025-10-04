@@ -1,0 +1,307 @@
+{
+  "database_name": "example_db",
+  "tables": {
+    "users": {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "auto_increment",
+          "character_set": null,
+          "collation": null,
+          "comment": "Primary key"
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR(50)",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": "utf8mb4",
+          "collation": "utf8mb4_unicode_ci",
+          "comment": "Unique username"
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR(255)",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": "utf8mb4",
+          "collation": "utf8mb4_unicode_ci",
+          "comment": "User email address"
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "is_nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Creation timestamp"
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "is_nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "on update CURRENT_TIMESTAMP",
+          "character_set": null,
+          "collation": null,
+          "comment": "Last update timestamp"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_username",
+          "columns": [
+            "username"
+          ],
+          "is_unique": true,
+          "index_type": "BTREE"
+        },
+        {
+          "name": "idx_email",
+          "columns": [
+            "email"
+          ],
+          "is_unique": true,
+          "index_type": "BTREE"
+        }
+      ],
+      "foreign_keys": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_unicode_ci",
+      "comment": "User accounts table"
+    },
+    "posts": {
+      "name": "posts",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "auto_increment",
+          "character_set": null,
+          "collation": null,
+          "comment": "Primary key"
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Foreign key to users table"
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(255)",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": "utf8mb4",
+          "collation": "utf8mb4_unicode_ci",
+          "comment": "Post title"
+        },
+        {
+          "name": "content",
+          "data_type": "TEXT",
+          "is_nullable": true,
+          "default": null,
+          "extra": "",
+          "character_set": "utf8mb4",
+          "collation": "utf8mb4_unicode_ci",
+          "comment": "Post content"
+        },
+        {
+          "name": "published",
+          "data_type": "TINYINT(1)",
+          "is_nullable": false,
+          "default": "0",
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Publication status"
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "is_nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Creation timestamp"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_user_id",
+          "columns": [
+            "user_id"
+          ],
+          "is_unique": false,
+          "index_type": "BTREE"
+        },
+        {
+          "name": "idx_published",
+          "columns": [
+            "published",
+            "created_at"
+          ],
+          "is_unique": false,
+          "index_type": "BTREE"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_posts_user_id",
+          "columns": [
+            "user_id"
+          ],
+          "referenced_table": "users",
+          "referenced_columns": [
+            "id"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": "CASCADE"
+        }
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_unicode_ci",
+      "comment": "Blog posts table"
+    },
+    "comments": {
+      "name": "comments",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "auto_increment",
+          "character_set": null,
+          "collation": null,
+          "comment": "Primary key"
+        },
+        {
+          "name": "post_id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Foreign key to posts table"
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Foreign key to users table"
+        },
+        {
+          "name": "content",
+          "data_type": "TEXT",
+          "is_nullable": false,
+          "default": null,
+          "extra": "",
+          "character_set": "utf8mb4",
+          "collation": "utf8mb4_unicode_ci",
+          "comment": "Comment content"
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "is_nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "",
+          "character_set": null,
+          "collation": null,
+          "comment": "Creation timestamp"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_post_id",
+          "columns": [
+            "post_id"
+          ],
+          "is_unique": false,
+          "index_type": "BTREE"
+        },
+        {
+          "name": "idx_user_id",
+          "columns": [
+            "user_id"
+          ],
+          "is_unique": false,
+          "index_type": "BTREE"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_comments_post_id",
+          "columns": [
+            "post_id"
+          ],
+          "referenced_table": "posts",
+          "referenced_columns": [
+            "id"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": "CASCADE"
+        },
+        {
+          "name": "fk_comments_user_id",
+          "columns": [
+            "user_id"
+          ],
+          "referenced_table": "users",
+          "referenced_columns": [
+            "id"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": "CASCADE"
+        }
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_unicode_ci",
+      "comment": "Comments table"
+    }
+  },
+  "views": {
+    "user_post_counts": {
+      "name": "user_post_counts",
+      "definition": "SELECT u.id, u.username, COUNT(p.id) as post_count FROM users u LEFT JOIN posts p ON u.id = p.user_id GROUP BY u.id, u.username",
+      "check_option": "NONE",
+      "security_type": "DEFINER"
+    }
+  },
+  "procedures": {},
+  "triggers": {}
+}
