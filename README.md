@@ -6,6 +6,12 @@ Licenced under the GNU General Public Licence (GPL) v3 (or later).
 
 Aspects of this work may have been created/augmented/assisted by AI tools.
 
+## Purpose
+
+When releasing software which uses MySQL databases we often want to migrate the schema to the new version. Some tools such as ORM do this for us if we use them but generally we need to think about how to **safely** perform the migration. This is especially an issue in expandable open-source where users may have also made changes to the schema.
+
+The MyRUG approach is to provide a tool that will handle intra-version migration either (a) by generating a version-to-version migration SQL script or (b) by exporting the new/current schema to JSON and being run at the install/client/customer end as part of the upgrade process to ensure the schema is up-to-date. Many options exist including being non-destructive to keep any changes made by the user.
+
 ## Features
 
 - **Export schemas** to JSON format for version control and backup
